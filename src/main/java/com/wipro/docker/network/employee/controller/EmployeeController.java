@@ -13,7 +13,6 @@ public class EmployeeController {
 
     @RequestMapping(value = "/allEmployees", method = RequestMethod.GET)
     public EmployeeResponse allEmployeesMethod() {
-        EmployeeResponse employeeResponse = employeeService.employeeResponse();
-        return employeeResponse;
+        return employeeService.employeeResponse();
     }
 }
