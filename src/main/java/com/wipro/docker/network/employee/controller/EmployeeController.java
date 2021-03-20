@@ -11,6 +11,11 @@ public class EmployeeController {
 
     EmployeeService  employeeService = new EmployeeService();
 
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public String home() {
+        return "http://localhost:9092/allEmployees";
+    }
+
     @RequestMapping(value = "/allEmployees", method = RequestMethod.GET)
     public EmployeeResponse allEmployeesMethod() {
         return employeeService.employeeResponse();

@@ -11,7 +11,6 @@ public class EmployeeService {
 
     RestTemplate restTemplate = new RestTemplate();
     public EmployeeResponse employeeResponse(){
-        EmployeeResponse employeeResponse = new EmployeeResponse();
         HttpHeaders headers = new HttpHeaders();
         String url = "http://dummy.restapiexample.com/api/v1/employees";
         HttpEntity<?> entity = new HttpEntity<>(headers);
@@ -23,6 +22,7 @@ public class EmployeeService {
         } catch (Exception e) {
             System.out.println("#######" + e.getMessage());
         }
+        assert responseEntity != null;
         return responseEntity.getBody();
     }
 }
