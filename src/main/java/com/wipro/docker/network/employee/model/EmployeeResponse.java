@@ -7,4 +7,5 @@ import java.util.List;
 public class EmployeeResponse {
     public String status;
     public List<EmployeeInfo> data;
+    public String message;
 }

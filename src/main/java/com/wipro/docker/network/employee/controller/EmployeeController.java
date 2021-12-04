@@ -1,24 +1,31 @@
 package com.wipro.docker.network.employee.controller;
 
+import com.wipro.docker.network.employee.model.EmployeeInfo;
+import com.wipro.docker.network.employee.model.EmployeeRequest;
 import com.wipro.docker.network.employee.model.EmployeeResponse;
+import com.wipro.docker.network.employee.model.SingleEmployeeResponse;
 import com.wipro.docker.network.employee.service.EmployeeService;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.io.IOException;
 
 @RestController
 public class EmployeeController {
 
-    //Another change
     EmployeeService  employeeService = new EmployeeService();
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String home() {
-        return "http://localhost:9092/allEmployees";
+    @RequestMapping(value = "/allEmployees", method = RequestMethod.GET)
+    public EmployeeResponse allEmployeesMethod() throws IOException {
+        return employeeService.employeeResponse();
     }
 
-    @RequestMapping(value = "/allEmployees", method = RequestMethod.GET)
-    public EmployeeResponse allEmployeesMethod() {
-        return employeeService.employeeResponse();
+    @RequestMapping(value = "/employee/{id}", method = RequestMethod.GET)
+    public SingleEmployeeResponse singleEmployee(@PathVariable int id) {
+        return employeeService.getEmployee(id);
+    }
+
+    @RequestMapping(value = "/postemployee", method = RequestMethod.POST)
+    public SingleEmployeeResponse postEmployee(@RequestBody EmployeeRequest employeeRequest) {
+        return employeeService.postEmployee(employeeRequest);
     }
 }
